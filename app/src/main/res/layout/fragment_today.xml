@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.weatherapp.today.TodayViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/today_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/after_noon"
+        android:paddingBottom="16dp"
+        tools:context=".today.TodayFragment">
+
+        <TextView
+            android:id="@+id/today_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:dateShortFormatted="@{viewModel.weather.dt}"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="@+id/location_name"
+            app:layout_constraintStart_toStartOf="@+id/location_name"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+        <TextView
+            android:id="@+id/location_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/roboto"
+            android:text="@{viewModel.weather.name}"
+            android:textColor="@color/teal_700"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/today_date_text"
+            tools:text="@tools:sample/cities" />
+
+        <TextView
+            android:id="@+id/temp_degree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:temperatureFormatted="@{viewModel.weather.main.temp}"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/roboto"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toTopOf="@+id/desc_text"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@tools:sample/us_zipcodes" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/pressure_card"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toTopOf="@id/humidity_card"
+            app:layout_constraintEnd_toStartOf="@+id/wind_card"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/pressure_img"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/pressure"
+                    tools:src="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/pressure_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:pressureFormatted="@{viewModel.weather.main.pressure}"
+                    tools:text="@tools:sample/us_zipcodes" />
+
+                <TextView
+                    android:id="@+id/pressure_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pressure" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/wind_card"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/pressure_card"
+            app:layout_constraintEnd_toStartOf="@+id/sunrise_card"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/pressure_card"
+            app:layout_constraintTop_toTopOf="@+id/pressure_card">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/wind_img"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/wind"
+                    tools:src="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/wind_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:windSpeedFormatted="@{viewModel.weather.wind.speed}"
+                    tools:text="@tools:sample/us_zipcodes" />
+
+                <TextView
+                    android:id="@+id/wind_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wind" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/sunrise_card"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/wind_card"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/wind_card"
+            app:layout_constraintTop_toTopOf="@+id/wind_card">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/sunrise_img"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/sunrise"
+                    tools:src="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/sunrise_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:formatTime="@{viewModel.weather.sys.sunrise}"
+                    tools:text="@tools:sample/us_zipcodes" />
+
+                <TextView
+                    android:id="@+id/sunrise_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sunrise" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/humidity_card"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/visibility_card"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/humidity_img"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/humidity"
+                    tools:src="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/humidity_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:humidityFormatted="@{viewModel.weather.main.humidity}"
+                    tools:text="@tools:sample/us_zipcodes" />
+
+                <TextView
+                    android:id="@+id/humidity_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/humidity" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/visibility_card"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/sunset_card"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/humidity_card"
+            app:layout_constraintTop_toTopOf="@id/humidity_card">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/visibility_img"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/eye"
+                    tools:src="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/visibility_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(viewModel.weather.visibility)}"
+                    tools:text="@tools:sample/us_zipcodes" />
+
+                <TextView
+                    android:id="@+id/visibility_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/visibility" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/sunset_card"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/visibility_card"
+            app:layout_constraintTop_toTopOf="@id/visibility_card">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/sunset_img"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/sunset"
+                    tools:src="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/sunset_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:formatTime="@{viewModel.weather.sys.sunset}"
+                    tools:text="@tools:sample/us_zipcodes" />
+
+                <TextView
+                    android:id="@+id/sunset_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sunset" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/desc_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="@{viewModel.weather.weather.get(0).description}"
+            app:layout_constraintBottom_toTopOf="@+id/pressure_card"
+            app:layout_constraintStart_toStartOf="@+id/temp_degree"
+            tools:text="@tools:sample/cities" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

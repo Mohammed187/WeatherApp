@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+
+    <string name="API_KEY">023f4cdd78b9af018566e86ab129fcd5</string>
+
+    <string name="degree">%1$d <sup>o</sup> </string>
+    <string name="location_required">Turn on location.</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="wind">Wind</string>
+    <string name="pressure">Pressure</string>
+    <string name="humidity">Humidity</string>
+    <string name="visibility">Visibility</string>
+    <string name="sunset">Sunset</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="weather">Weather</string>
+    <string name="feels">Feels</string>
+    <string name="today_weather">Today Weather</string>
+    <string name="daily_weather">Daily Weather</string>
+</resources>
